@@ -38,7 +38,7 @@ const VideoUpload = () => {
     setUploading(true);
 
     try {
-      const response = await axios.post('http://localhost:5000/upload', formData, {
+      const response = await axios.post('https://video-compressing-api-9a6m.onrender.com/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

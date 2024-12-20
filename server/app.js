@@ -61,7 +61,7 @@ const compressVideo = (inputPath, outputPath) => {
             .withFps(30)
             .outputOptions([
                 '-crf 23', // Balanced compression quality
-                '-preset medium', // Default speed vs compression
+                '-preset ultrafast', // Default speed vs compression
                 '-movflags +faststart', // Optimized for progressive streaming
             ])
             .on('progress', (progress) => {

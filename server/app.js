@@ -82,6 +82,7 @@ const compressVideo = (inputPath, outputPath) => {
 
 // Compress video function using ffmpeg
 app.post('/upload', upload.single('video'), async (req, res) => {
+    console.log("request received")
     if (!req.file) {
         return res.status(400).send('No video file uploaded.');
     }

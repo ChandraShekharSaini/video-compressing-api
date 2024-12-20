@@ -7,6 +7,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { v2 as cloudinary } from 'cloudinary';
 import dotenv from 'dotenv';
+import { spawn } from 'child_process';
 const PORT = process.env.PORT || 3500;
 // Load environment variables
 dotenv.config();
@@ -52,30 +53,41 @@ const upload = multer({ storage: storage });
 
 
 
-const compressVideo = (inputPath, outputPath) => {
+
+const compressVideoWithSpawn = (inputPath, outputPath) => {
     return new Promise((resolve, reject) => {
-        ffmpeg(inputPath)
-            .output(outputPath)
-            .withVideoCodec('libx264') // Use H.264 codec for video compression
-            .withAudioCodec('aac')     // Use AAC codec for audio compression
-            .withFps(30)
-            .outputOptions([
-                '-crf 23', // Balanced compression quality
-                '-preset ultrafast', // Default speed vs compression
-                '-movflags +faststart', // Optimized for progressive streaming
-            ])
-            .on('progress', (progress) => {
-                console.log(`Processing: ${Math.round(progress.percent)}%`);
-            })
-            .on('end', () => {
-                console.log('Compression finished');
+        // Spawn the ffmpeg process
+        const ffmpegProcess = spawn('ffmpeg', [
+            '-i', inputPath,          // Input file
+            '-c:v', 'libx264',        // Video codec
+            '-preset', 'medium',      // Compression speed
+            '-crf', '23',             // Compression quality (lower is better)
+            '-c:a', 'aac',            // Audio codec
+            '-movflags', '+faststart', // Progressive streaming
+            '-y',                     // Overwrite output
+            outputPath,               // Output file
+        ]);
+
+        // Capture and log progress output
+        ffmpegProcess.stderr.on('data', (data) => {
+            console.log(`FFmpeg output: ${data}`);
+        });
+
+        // Handle process completion
+        ffmpegProcess.on('close', (code) => {
+            if (code === 0) {
+                console.log('Compression finished successfully');
                 resolve(outputPath);
-            })
-            .on('error', (err) => {
-                console.error('Error during compression', err);
-                reject(err);
-            })
-            .run();
+            } else {
+                reject(new Error(`FFmpeg process exited with code ${code}`));
+            }
+        });
+
+        // Handle errors
+        ffmpegProcess.on('error', (err) => {
+            console.error('Error during FFmpeg processing:', err);
+            reject(err);
+        });
     });
 };
 
@@ -104,7 +116,7 @@ app.post('/upload', upload.single('video'), async (req, res) => {
         const rawFileCloudinaryUrl = rawUploadResult.secure_url;
 
         console.log('Compressing the video...');
-        const compressedVideoPath = await compressVideo(rawFilePath, compressedFilePath);
+        const compressedVideoPath = await compressVideoWithSpawn(rawFilePath, compressedFilePath);
 
         // Step 3: Upload the compressed video to the "compressed_videos" folder in Cloudinary
         console.log('Uploading compressed video to Cloudinary...');

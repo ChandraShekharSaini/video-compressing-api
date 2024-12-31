@@ -14,7 +14,7 @@ const Error = () => {
           loop
           autoplay
           className={styles.annimation} 
-          alt='image'
+          alt='404'
         />
       </div>
 

@@ -1,0 +1,173 @@
+* {
+  padding: 0;
+  margin: 0;
+  
+}
+
+body {
+  font-family: 'Graphik', Arial, sans-serif;
+  width: 100%;
+  /* margin-top: 60px; */
+
+}
+
+.MainNavigation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100000;
+}
+
+nav {
+  width: 100%;
+  display: flex;
+  height: 60px;
+  box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255);
+}
+
+.navbarLogo {
+
+  width: 15%;
+  height: inherit;
+}
+
+.navbarLogo img {
+  width: 95%;
+  height: 70%;
+}
+
+.navbar {
+  width: 70%;
+ 
+}
+
+.navbar {
+  /* border: 1px solid red; */
+  display: grid;
+  grid-template-rows: 100%;
+  grid-template-columns: repeat(4, 15%);
+
+  column-gap: 20px;
+
+  align-items: center;
+  justify-items: center;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: rgb(51, 51, 59);
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 60px;
+}
+
+.navbar a:hover {
+  color: rgb(229, 50, 45);
+}
+
+.auth {
+  /* border: 1px solid darkcyan; */
+  width: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  
+}
+
+.auth a {
+  text-decoration: none;
+  text-decoration: none;
+  color: rgb(51, 51, 59);
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.auth .signBtn {
+  width: 30%;
+  height: 60%;
+  border-radius: 10px;
+  background-color: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reactIcon {
+  display: none;
+}
+
+@media (max-width: 500px) {
+
+
+
+  nav {
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.1);
+   
+  }
+
+  .navbarLogo {
+    /* border: 1px solid violet; */
+    width: 30vw;
+  }
+
+  .navbar {
+    display: none;
+  }
+
+  .auth {
+    /* border: 1px solid darkcyan; */
+    width: 38vw;
+    height: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5vw;
+  }
+
+  .auth a {
+    text-decoration: none;
+    color: rgb(51, 51, 59);
+    font-weight: 600;
+    font-size: 3vw;
+  }
+
+  .auth .signBtn {
+    width: 39%;
+    height: 60%;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .reactIcon {
+    display: contents;
+  }
+
+  .iconStyle {
+    font-size: 1.6rem;
+    /* color: #333;  */
+    color: black;
+  }
+
+  .iconStyle:hover {
+    color: red;
+  }
+
+  .login {
+    display: none;
+  }
+}

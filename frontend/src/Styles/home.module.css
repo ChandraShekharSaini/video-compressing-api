@@ -1,0 +1,141 @@
+.mainCrousel {
+  margin-top: 60px;
+  padding: 120px 0 0 150px;
+  
+}
+
+.crousel {
+  /* border: 1px solid black; */
+  width: inherit;
+
+  display: grid;
+  grid-template-columns: repeat(4, 330px);
+  grid-template-rows: repeat(4, 150px);
+
+  grid-template-areas: 'one one one one ' 'two two three three' 'two two three three' 'two two three three';
+}
+
+.crouselHeading {
+  grid-area: one;
+  /* border: 1px solid red; */
+
+  font-size: 100px;
+  font-weight: 600;
+}
+
+.crouselParagraph {
+  grid-area: two;
+  /* border: 1px solid blue; */
+
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.halfHeading {
+  color: rgb(127, 127, 127);
+}
+
+.crouselButton {
+  padding: 20px 30px 20px 30px;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 600;
+  background-color: rgb(15, 174, 208);
+  color: white;
+
+  margin-top: 30px;
+}
+
+.crouselImage {
+  grid-area: three;
+  /* border: 1px solid khaki; */
+
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  padding-right: 70px;
+}
+
+.crouselImage img {
+  width: 45vw;
+  height: 40vw;
+}
+
+.crouselButton {
+  grid-area: four;
+  border: darkred;
+}
+
+.gradientText {
+  font-size: 100px;
+  font-weight: 600;
+  text-align: center;
+  background: linear-gradient(
+    to right,
+    rgb(15, 174, 208),
+    rgb(14, 169, 204),
+    rgb(16, 184, 215),
+    rgb(77, 202, 153),
+    rgb(139, 217, 86),
+    rgb(165, 223, 59)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media only screen and (max-width: 500px) {
+  .mainCrousel {
+  
+    padding: 20px;
+  }
+
+  .crousel {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      'one'
+      'two'
+      'three';
+  }
+
+  .crouselHeading {
+    grid-area: one;
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  .crouselParagraph {
+    grid-area: two;
+    font-size: 18px;
+    font-weight: 400;
+    text-align: center;
+    margin-top: 20px;
+  }
+
+  .crouselImage {
+    grid-area: three;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .crouselImage img {
+    width: 90vw;
+    height: 90vw;
+  }
+
+  .crouselButton {
+    grid-area: auto;
+    font-size: 16px;
+    padding: 10px 20px;
+    margin: 20px auto;
+    display: block;
+    text-align: center;
+  }
+
+  .gradientText {
+    font-size: 40px;
+    font-weight: 600;
+    text-align: center;
+  }
+}

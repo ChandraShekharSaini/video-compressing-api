@@ -1,0 +1,20 @@
+.container {
+  
+  width: 100%;
+  height: 90vh;
+  display: grid;
+  justify-content: center;
+  align-content: center;
+}
+
+.annimation {
+  width: 50vw;
+}
+
+@media only screen and (max-width: 500px) {
+ 
+
+  .annimation {
+    width: 150vw;
+  }
+}

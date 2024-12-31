@@ -1,0 +1,155 @@
+.uploadArea {
+
+  width: 80%;
+  height: 100vh;
+  margin: auto;
+  border-radius: 10px;
+  background-color: rgb(245, 245, 245);
+}
+
+.uploadHeading {
+  font-size: 60px;
+  color: black;
+  font-family: sans-serif;
+}
+
+.uploadParagraph {
+  color: rgb(128, 128, 128);
+  font-size: 20px;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.uploadArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-items: center;
+}
+
+.uploadVideoArea {
+  border: 2px dashed #007bff;
+  width: 300px;
+  text-align: center;
+  margin-bottom: 20px;
+  width: 40vw;
+  height: 20vw;
+  border-radius: 10px;
+
+  display: grid;
+
+  align-content: end;
+  justify-content: center;
+  gap: 10px;
+}
+
+.uploudIcon {
+  font-size: 100px;
+}
+
+.uploadBtn {
+  margin-top: 10px;
+  background-color: white;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: rgb(15, 115, 255);
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.uploadBtn:hover {
+  background-color: white;
+  color: rgb(15, 115, 255);
+  border: 2px solid rgb(15, 115, 255);
+}
+
+.uploadVideoArea {
+  font-size: 25px;
+  color: rgb(102, 102, 102);
+}
+
+.submitBtn {
+  background-color: white;
+  color: white;
+  padding: 15px 20px;
+  border: none;
+  font-size: 17px;
+  font-weight: 600;
+  background-color: rgb(15, 115, 255);
+  border-radius: 50px;
+  cursor: pointer;
+  margin-left: 20px;
+}
+
+@media only screen and (max-width: 500px) {
+  .uploadArea {
+    width: 95%;
+    margin: auto;
+    border-radius: 10px;
+    background-color: rgb(245, 245, 245);
+
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .uploadHeading {
+    font-size: 20px;
+    color: black;
+    text-align: center;
+  }
+
+  .uploadParagraph {
+    color: rgb(128, 128, 128);
+    font-size: 15px;
+  }
+
+  .uploadVideoArea {
+    margin-bottom: 20px;
+    width: 70vw;
+    height: 50vw;
+
+    gap: 5px;
+  }
+
+  .uploadVideoArea {
+    font-size: 20px;
+    color: rgb(102, 102, 102);
+  }
+
+  .uploudIcon {
+    font-size: 60px;
+  }
+  .uploadVideoArea p {
+    display: none;
+  }
+
+  .uploadBtn {
+    padding: 10px 9px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 200px;
+    margin-bottom: 10px;
+  }
+
+  .submitBtn {
+    background-color: white;
+    color: white;
+    padding: 12px 15px;
+    border: none;
+    font-size: 15px;
+    background-color: rgb(15, 115, 255);
+
+    /* margin-left: 20px; */
+  }
+}

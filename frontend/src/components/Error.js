@@ -13,7 +13,8 @@ const Error = () => {
           src="https://cdn.dribbble.com/users/381530/screenshots/3949858/media/aff8c4541abddf91b8f69206b2175381.gif"
           loop
           autoplay
-          className={styles.annimation}
+          className={styles.annimation} 
+          alt='image'
         />
       </div>
 

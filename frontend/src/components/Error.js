@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styles from "../components/error.module.css"
-import {Link} from "react-router-dom"
+
 
 
 const Error = () => {

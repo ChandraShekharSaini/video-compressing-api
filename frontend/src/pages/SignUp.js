@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from "../Styles/signup.module.css";
 
@@ -53,6 +53,7 @@ const SignUp = () => {
   };
 
   const handleSubmit = async (ev) => {
+    console.log(formdata);
     ev.preventDefault();
     if (formValidation()) {
       try {
@@ -65,15 +66,14 @@ const SignUp = () => {
         });
 
         const userData = await response.json();
-
         if (response.ok) {
-          console.log(userData);
+          console.log("OK", userData);
           setTimeout(() => {
             usenavigate("/account-created");
-          },2000)
+          }, 2000)
         } else {
           console.error(userData);
-          setError({ server: "Signup failed. Please try again." });
+          setError({ server: userData.message });
         }
       } catch (error) {
         console.error("Error:", error);
@@ -82,74 +82,193 @@ const SignUp = () => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    window.location.href = "http://localhost:3500/auth/google";
+
+  };
+
+  const handleRedditSignIn = async () => {
+    window.location.href = "http://localhost:3500/auth/github";
+
+  };
+
+
+
+
+
   const errorMessage = {
     color: "red",
     fontSize: "15px",
-    marginTop: "10px"
+    marginTop: "10px",
+    textAlign: "left"
   }
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={styles.signupContainer}>
-        <div className={styles.imageArea}></div>
-        <div className={styles.signUpPage}>
-          <button>
-            <img src="/google.svg" className={styles.svgLogo} alt="Google" />
-            Google
-          </button>
-          <button>
-            <img src="/reddit.svg" className={styles.svgLogo} alt="Reddit" />
-            Reddit
-          </button>
-          <div className={styles.signupSub}>
-            <p>First Name</p>
-            <input
-              type="text"
-              id="firstname"
-              name="firstname"
-              onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
-            />
-            {error.firstname && <p style={errorMessage}>{error.firstname}</p>}
 
-            <p>Last Name</p>
-            <input
-              type="text"
-              name="lastname"
-              onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
-            />
-            {error.lastname && <p style={errorMessage}>{error.lastname}</p>}
 
-            <p>Email Address</p>
-            <input
-              type="text"
-              name="email"
-              onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
-              autocomplete="email"
-            />
-            {error.email && <p style={errorMessage}>{error.email}</p>}
+    //   <button
+    //   onClick={handleGoogleSignIn}
+    //   <img src="/google.svg" className={styles.svgLogo} alt="Google" />
+    //   Google
+    // </button>
+    // <button onAbort={handleRedditSignIn}>
+    //   <img src="/reddit.svg" className={styles.svgLogo} alt="Reddit" />
+    //   Reddit
+    // </button>
 
-            <p>Phone Number</p>
-            <input
-              type="number"
-              name="number"
-              onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
-            />
-            {error.number && <p style={errorMessage}>{error.number}</p>}
 
-            <p>Password</p>
-            <input
-              type="password"
-              name="password"
-              onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
-              autocomplete="new-password"
-            />
-            {error.password && <p style={errorMessage}>{error.password}</p>}
-          </div>
-          <button className={styles.submitform}>Submit</button>
+    //   <form onSubmit={handleSubmit}>
+    //     <div className={styles.signupContainer}>
+    //       <div className={styles.imageArea}></div>
+    //       <div className={styles.signUpPage}>
+
+    //         <div className={styles.signupSub}>
+    //           <p>First Name</p>
+    //           <input
+    //             type="text"
+    //             id="firstname"
+    //             name="firstname"
+    //             onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+    //           />
+    //           {error.firstname && <p style={errorMessage}>{error.firstname}</p>}
+
+    //           <p>Last Name</p>
+    //           <input
+    //             type="text"
+    //             name="lastname"
+    //             onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+    //           />
+    //           {error.lastname && <p style={errorMessage}>{error.lastname}</p>}
+
+    //           <p>Email Address</p>
+    //           <input
+    //             type="text"
+    //             name="email"
+    //             onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+    //             autocomplete="email"
+    //           />
+    //           {error.email && <p style={errorMessage}>{error.email}</p>}
+
+    //           <p>Phone Number</p>
+    //           <input
+    //             type="number"
+    //             name="number"
+    //             onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+    //           />
+    //           {error.number && <p style={errorMessage}>{error.number}</p>}
+
+    //           <p>Password</p>
+    //           <input
+    //             type="password"
+    //             name="password"
+    //             onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+    //             autocomplete="new-password"
+    //           />
+    //           {error.password && <p style={errorMessage}>{error.password}</p>}
+    //         </div>
+    //         {error.server && <p style={errorMessage}>{error.server}</p>}
+    //         <button className={styles.submitform}>Submit</button>
+
+    //       </div>
+    //     </div>
+    //   </form>
+
+
+
+
+
+
+    <div className={styles.signupContainer}>
+      <div className={styles.imageArea}></div>
+
+      <div className={styles.signUpPage}>
+        <button onClick={handleGoogleSignIn}>
+          <img src="/google.svg" className={styles.svgLogo} alt="Google" />
+          Google
+        </button>
+        <button onClick={handleRedditSignIn}>
+          <img src="/github.svg" className={styles.svgLogo} alt="Github" />
+          GitHub
+        </button>
+
+
+        <div className={styles.signupSub}>
+          <form onSubmit={handleSubmit}>
+            <div>
+              <p>First Name</p>
+              <input
+                type="text"
+                id="firstname"
+                name="firstname"
+                onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+              />
+
+              {error.firstname && <p style={errorMessage}>{error.firstname}</p>}
+            </div>
+
+
+            <div>
+              <p>Last Name</p>
+              <input
+                type="text"
+                name="lastname"
+                onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+              />
+              {error.lastname && <p style={errorMessage}>{error.lastname}</p>}
+            </div>
+
+
+            <div>
+              <p>Email Address</p>
+              <input
+                type="text"
+                name="email"
+                onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+                autoComplete="email"
+              />
+              {error.email && <p style={errorMessage}>{error.email}</p>}
+            </div>
+
+
+            <div>
+              <p>Phone Number</p>
+              <input
+                type="number"
+                name="number"
+                onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+              />
+              {error.number && <p style={errorMessage}>{error.number}</p>}
+            </div>
+
+
+            <div>
+              <p>Password</p>
+              <input
+                type="password"
+                name="password"
+                onChange={(ev) => handleformdata(ev.target.value, ev.target.name)}
+                autoComplete="new-password"
+              />
+              {error.password && <p style={errorMessage}>{error.password}</p>}
+            </div>
+
+            {error.server && <p style={errorMessage}>{error.server}</p>}
+            <button type="submit" className={styles.submitform}>
+              Submit
+            </button>
+          </form>
         </div>
+
+
+
       </div>
-    </form>
+    </div>
+
+
+
+
   );
+
 };
 
 export default SignUp;

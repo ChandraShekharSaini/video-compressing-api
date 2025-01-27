@@ -8,6 +8,13 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { v2 as cloudinary } from 'cloudinary';
 import dotenv from 'dotenv';
+import jwt from 'jsonwebtoken';
+import cookieParser from 'cookie-parser';
+import axios from 'axios';
+import User from "./module/auth.module.js"
+
+const app = express();
+
 
 
 import { spawn } from 'child_process';
@@ -17,9 +24,13 @@ const PORT = process.env.PORT || 3500;
 dotenv.config();
 
 
-const app = express();
-app.use(cors())
+
+app.use(cors({
+    origin: 'http://localhost:3000',
+    credentials: true,
+}))
 app.use(express.json())
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -55,8 +66,6 @@ const storage = multer.diskStorage({
 
 // Initialize multer with the storage configuration
 const upload = multer({ storage: storage });
-
-
 
 
 const compressVideoWithSpawn = (inputPath, outputPath) => {
@@ -145,7 +154,7 @@ app.post('/upload', upload.single('video'), async (req, res) => {
 
         // Send the response with the compressed video URL
         console.log("Sending response to user..")
-        res.send({
+        res.status(200).json({
             message: 'Video uploaded, compressed, and stored in Cloudinary successfully!',
             compressedVideoUrl: compressedUploadResult.secure_url,
         });
@@ -165,12 +174,84 @@ import authRouter from './routes/auth.route.js'
 
 app.use("/api/auth", authRouter)
 
+// app.use(
+//     session({
+//       secret: 'knkknknkknknk',
+//       resave: false,
+//       saveUninitialized: true,
+//     })
+//   );
+import passport from './authentication/passport.js';
+
+app.use(passport.initialize());
+
+
+app.get(
+    '/auth/google',
+    passport.authenticate('google', { scope: ['profile', 'email'] })
+);
+
+app.get(
+    '/auth/google/callback',
+    passport.authenticate('google', { failureRedirect: 'http://localhost:3000/sign-in', session: false }),
+    (req, res) => {
+        console.log(req.user);
+        //   res.redirect('http://localhost:3000');  // Redirect to frontend
+
+        const user = req.user
+
+
+        // const token = jwt.sign({ id: req.user._id }, 'knkk6tnknk')
+        //.cookie('access-token', token, { maxAge: 360 })
+        res.status(200).redirect(`http://localhost:3000/profile?user=${encodeURIComponent(JSON.stringify(req.user))}`)
+
+    }
+);
+
+import passportGithub from './authentication/passportGithub.js';
+app.use(passportGithub.initialize())
+app.get('/auth/github',
+    passportGithub.authenticate('github', { scope: ['profile', 'email'] })
+)
+app.get('/auth/github/callback',
+    passportGithub.authenticate('github', { failureRedirect: "http://localhost:3000/sign-in", session: false }),
+    (req, res) => {
+
+        const user = req
+        console.log(user)
+        res.status(200).redirect(`http://localhost:3000/profile?user=${encodeURIComponent(JSON.stringify(req.user))}`)
+    }
+)
+
+app.use((err, req, res, next) => {
+    const statusCode = err.statusCode || 500;
+    const message = err.message || 'Internal Server Error';
+    return res.status(statusCode).json({
+        success: false,
+        statusCode,
+        message,
+    });
+});
 
 
 mongoose.connect('mongodb://127.0.0.1:27017/videocompress').then(() => {
     console.log("Connected To DB")
 }).catch((error) => {
     console.log(error.message)
+})
+
+
+
+// mongoose.connect("mongodb+srv://chandrashekharsaini322:chandra@video-compression.b4eyc.mongodb.net/videocompress?retryWrites=true&w=majority&appName=video-compression").then(() => {
+//     console.log("Connected To DB")
+// }).catch((error) => {
+//     console.log(error)
+// })
+
+const __dirname2 = path.resolve();
+app.use(express.static(path.join(__dirname2, '/frontend/build')))
+app.get("*", (req, res) => {
+   res.sendFile(path.resolve(__dirname2 , "frontend" , "build" , "index.html"))
 })
 
 

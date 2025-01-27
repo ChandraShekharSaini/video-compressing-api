@@ -11,7 +11,7 @@ const Footer = () => {
   return (
     <footer className={styles.mainFooter}>
       <div className={styles.footerBox1}>
-        <img src="https://marketplace.canva.com/EAE9TG4QSLU/1/0/1600w/canva-black-illustration-ninja-esport-or-gaming-mascot-logo-QM1iGUuQHmM.jpg" />
+        <img src="https://play-lh.googleusercontent.com/-jFvYPoz5GmPoOHa5UyCBkyO8sG-XUk6NSI5fciodaPUFNCSUV1YSlJJoJFf7rMdCtU" />
         <p className={styles.footer1details}><MdEmail />support@video.com</p>
         <p className={styles.details}><FaPhoneAlt />+91 8445680548</p>
         <div className={styles.sociaLogo}>

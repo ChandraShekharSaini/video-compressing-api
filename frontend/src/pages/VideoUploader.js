@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate ,useLocation } from 'react-router-dom';
 import axios from 'axios';
 import { useDropzone } from 'react-dropzone';
 import DownloadFile from './DownloadFile';
@@ -9,6 +9,7 @@ import { IoCloudUploadOutline } from "react-icons/io5";
 
 const VideoUpload = () => {
   const navigate = useNavigate();
+  
   const [videoFile, setVideoFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [responseMessage, setResponseMessage] = useState('');
@@ -27,7 +28,7 @@ const VideoUpload = () => {
   // Initialize react-dropzone with configuration
   const { getRootProps, getInputProps } = useDropzone({
     onDrop,
-    accept: 'video/*', // Accept video files only
+    accept: {'video/*':[]}, // Accept video files only
   });
 
   const handleSubmit = async (e) => {
@@ -59,8 +60,8 @@ const VideoUpload = () => {
       console.log(response);
       setResponseMessage(response.data.message);
       setCompressedVideoUrl(response.data.compressedVideoUrl);
-      <DownloadFile compressedVideoUrl={compressedVideoUrl} />
-      navigate("/download")
+      
+      navigate("/download",{state: {compressedVideoUrl: response.data.compressedVideoUrl}});
 
     } catch (error) {
       setResponseMessage('Failed to upload the video.');

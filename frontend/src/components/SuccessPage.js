@@ -10,7 +10,7 @@ const SuccessPage = () => {
   useEffect(() => {
     setTimeout(() => {
      usenavigate("/sign-in")
-    },5000)
+    },6900)
   }, [])
 
 
@@ -19,7 +19,7 @@ const SuccessPage = () => {
       <DotLottieReact
         src="https://lottie.host/b7603f74-0d04-444f-8eff-27be50f741c5/WLR5o4aPR2.lottie"
         loop
-        autoplay
+        autoplay  
         className={styles.annimation}
       />
     </div>

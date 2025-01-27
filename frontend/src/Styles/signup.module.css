@@ -1,14 +1,13 @@
 .signupContainer {
+  
   width: 100%;
   /* border: 1px solid green; */
   height: 100vh;
   display: grid;
   grid-template-columns: 0.6fr 2fr;
-  
 }
 
 .imageArea {
-  border: 1px solid green;
   background-image: url('https://wallpaper-mania.com/wp-content/uploads/2018/09/High_resolution_wallpaper_background_ID_77700421372.jpg');
   background-repeat: no-repeat;
   background-size: cover;
@@ -16,6 +15,7 @@
 }
 
 .signUpPage {
+  
   padding-top: 40px;
   padding-left: 20px;
   display: flex;
@@ -47,6 +47,18 @@
   width: 25px;
 }
 
+.signupSub {
+  /* border: 6px solid hotpink;
+  display: flex;
+  flex-direction: column;
+  justify-content: start; */
+
+  display: grid;
+  justify-content: start;
+  align-items: start;
+  
+}
+
 .signupSub p {
   color: rgb(85, 100, 108);
   font: 13px;
@@ -73,7 +85,12 @@
   width: 10px;
   padding: 10px 5px;
   background-color: gold;
+  
 }
+
+.submitform{
+  margin-top: 30px;
+} 
 
 .errorMessage {
   color: red;
@@ -124,6 +141,18 @@
 
   .svgLogo {
     width: 30px;
+  }
+
+  .signupSub {
+    /* border: 6px solid hotpink;
+  display: flex;
+  flex-direction: column;
+  justify-content: start; */
+   
+    display: grid;
+    justify-content: start;
+    align-items: start;
+    gap: 10px;
   }
 
   .signupSub p {

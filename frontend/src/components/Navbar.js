@@ -10,7 +10,7 @@ const Navbar = () => {
             <nav>
 
                 <div className={styles.navbarLogo}>
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYYi44kQpCBkQ3uVe3UHWAAJ1ELdu9if_QASvQnu1nOs99fEQtu_dGMxDVo791HyokeA&usqp=CAU" />
+                    <img src="https://play-lh.googleusercontent.com/-jFvYPoz5GmPoOHa5UyCBkyO8sG-XUk6NSI5fciodaPUFNCSUV1YSlJJoJFf7rMdCtU" />
                 </div>
 
                 <div className={styles.navbar}>

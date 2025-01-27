@@ -1,14 +1,12 @@
 * {
   padding: 0;
   margin: 0;
-  
 }
 
 body {
   font-family: 'Graphik', Arial, sans-serif;
   width: 100%;
   /* margin-top: 60px; */
-
 }
 
 .MainNavigation {
@@ -22,25 +20,28 @@ body {
 nav {
   width: 100%;
   display: flex;
-  height: 60px;
+  height: 70px;
   box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.1);
   background-color: rgb(255, 255, 255);
 }
 
 .navbarLogo {
-
   width: 15%;
   height: inherit;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .navbarLogo img {
-  width: 95%;
-  height: 70%;
+  width: 35%;
+  height: 90%;
+  border-radius: 50%;
 }
 
 .navbar {
   width: 70%;
- 
 }
 
 .navbar {
@@ -74,7 +75,6 @@ nav {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  
 }
 
 .auth a {
@@ -101,24 +101,34 @@ nav {
 }
 
 @media (max-width: 500px) {
-
-
-
   nav {
     /* border: 1px solid black; */
     width: 100%;
-    height: 60px;
+    height: 70px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
     box-shadow: 1px 5px 10px rgba(0, 0, 0, 0.1);
-   
   }
 
+  
+
+
   .navbarLogo {
-    /* border: 1px solid violet; */
-    width: 30vw;
+ 
+    width: 35vw;
+   
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .navbarLogo img {
+    width: 35%;
+    height: 90%;
+    border-radius: 50%;
   }
 
   .navbar {

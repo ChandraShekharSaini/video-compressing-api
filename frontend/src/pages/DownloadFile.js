@@ -1,15 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from "../Styles/download.module.css"
+import { useLocation } from 'react-router-dom';
 
-const DownloadFile = (compressedVideoUrl) => {
-  console.log(compressedVideoUrl)
+const DownloadFile = () => {
+
+  const location = useLocation();
+  const compressedVideoUrl = location.state?.compressedVideoUrl;
+  console.log(compressedVideoUrl);
 
 
   const handleDownload = async () => {
-
-
     try {
-      // Fetch the video as a blob
       const response = await fetch(compressedVideoUrl, { mode: 'cors' });
       if (!response.ok) {
         throw new Error(`Failed to fetch video: ${response.statusText}`);
@@ -21,7 +22,7 @@ const DownloadFile = (compressedVideoUrl) => {
       // Create a temporary anchor element
       const anchor = document.createElement('a');
       anchor.href = url;
-      anchor.download = 'compressed_video.mp4'; // File name for the downloaded video
+      anchor.download = 'compressed_video.mp4'; // Set file name for the downloaded video
       document.body.appendChild(anchor);
       anchor.click(); // Programmatically trigger a click
       document.body.removeChild(anchor); // Clean up
@@ -32,7 +33,6 @@ const DownloadFile = (compressedVideoUrl) => {
       console.error('Error downloading video:', error);
     }
   };
-
 
   return (
 
@@ -46,23 +46,23 @@ const DownloadFile = (compressedVideoUrl) => {
 
 
       <div className={styles.downloadVideo}>
-        {compressedVideoUrl &&
-          <video
-            controls
-            loop
-            autoPlay
-            muted
-            
-          >
-            <source
-              src={compressedVideoUrl}
-              type="video/mp4"
-            />
 
-            Your browser does not support the video tag.
-          </video>
+        <video
+          controls
+          loop
+          autoPlay
+          muted
 
-        }
+        >
+          <source
+            src={compressedVideoUrl}
+            type="video/mp4"
+          />
+
+          Your browser does not support the video tag.
+        </video>
+
+
 
       </div>
 

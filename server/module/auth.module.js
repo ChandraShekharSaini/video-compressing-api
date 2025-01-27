@@ -1,39 +1,62 @@
-import mongoose, { Schema } from "mongoose";
+import mongoose, { Schema } from 'mongoose';
 
-const userSchema = new Schema({
-  firstname: {
+const providerSchema = new Schema({
+  providerName: {
     type: String,
-    required: [true, 'Name is required'],
+
   },
 
-  lastname: {
+  fullName: {
+    type: String
+  },
+  providerId: {
     type: String,
-    required: [true, 'Name is required'],
+
+  },
+  accessToken: {
+    type: String,
+
+  },
+  profileImage: {
+    type: String,
+  },
+
+}, { _id: false }); // Disable _id for subdocuments to keep the array clean
+
+const userSchema = new Schema({
+  firstName: {
+    type: String,
+
+  },
+
+  lastName: {
+    type: String,
   },
   email: {
     type: String,
-    required: [true, 'Email is required'],
     unique: true,
-
   },
-
   number: {
     type: Number,
-    required: true,
-    unique: true
+    unique: true,
   },
-
-
   password: {
     type: String,
-    unique: true
+    unique: true,
   },
-
+  authProviders: [providerSchema], // Array of provider objects
+  currentProvider: {
+    type: String, // Name of the currently active provider
+  },
   createdAt: {
     type: Date,
-    default: Date.now, // Automatically sets the creation date
+    default: Date.now,
   },
-})
+  updatedAt: {
+    type: Date,
+    default: Date.now,
+  },
+});
 
 const User = mongoose.model('User', userSchema);
-export default User
+export default User;

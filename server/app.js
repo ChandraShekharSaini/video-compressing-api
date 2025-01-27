@@ -77,7 +77,7 @@ const compressVideoWithSpawn = (inputPath, outputPath) => {
             '-i', inputPath,          // Input file
             '-c:v', 'libx264',        // Video codec
             '-preset', 'slow',      // Compression speed
-            '-crf', '40',             // Compression quality (lower is better)
+            '-crf', '20',             // Compression quality (lower is better)
             '-c:a', 'aac',            // Audio codec
             '-movflags', '+faststart', // Progressive streaming
             '-y',                     // Overwrite output

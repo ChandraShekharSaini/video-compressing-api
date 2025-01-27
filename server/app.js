@@ -25,10 +25,12 @@ dotenv.config();
 
 
 
-app.use(cors({
-    origin: 'https://my-video-9ljf.onrender.com',
-    credentials: true,
-}))
+// app.use(cors({
+//     // origin: 'https://video-compressing-api-1.onrender.com',
+//     credentials: true,
+// }))
+
+app.use(cors())
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }))

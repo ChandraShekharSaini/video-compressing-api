@@ -234,19 +234,19 @@ app.use((err, req, res, next) => {
 });
 
 
-mongoose.connect('mongodb://127.0.0.1:27017/videocompress').then(() => {
-    console.log("Connected To DB")
-}).catch((error) => {
-    console.log(error.message)
-})
-
-
-
-// mongoose.connect("mongodb+srv://chandrashekharsaini322:chandra@video-compression.b4eyc.mongodb.net/videocompress?retryWrites=true&w=majority&appName=video-compression").then(() => {
+// mongoose.connect('mongodb://127.0.0.1:27017/videocompress').then(() => {
 //     console.log("Connected To DB")
 // }).catch((error) => {
-//     console.log(error)
+//     console.log(error.message)
 // })
+
+
+
+mongoose.connect(process.env.MONGODB_STRING).then(() => {
+    console.log("Connected To DB")
+}).catch((error) => {
+    console.log(error)
+})
 
 const __dirname2 = path.resolve();
 app.use(express.static(path.join(__dirname2, '/frontend/build')))

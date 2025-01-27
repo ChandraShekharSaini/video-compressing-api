@@ -73,32 +73,33 @@ const upload = multer({ storage: storage });
 
 const compressVideo = (inputPath, outputPath) => {
     return new Promise((resolve, reject) => {
-      ffmpeg(inputPath)
-        .output(outputPath)
-        .videoCodec('libx264')  // Video codec
-        .audioCodec('aac')      // Audio codec
-        .audioBitrate('128k')   // Set audio bitrate
-        .videoBitrate('500k')   // Set video bitrate (adjust based on desired quality/size)
-      
-        .on('start', (commandLine) => {
-          console.log(`FFmpeg process started with command: ${commandLine}`);
-        })
-        .on('progress', (progress) => {
-          console.log(`Processing: ${progress.percent}% done`);
-        })
-        .on('end', () => {
-          console.log('Compression finished successfully');
-          resolve(outputPath);
-        })
-        .on('error', (err) => {
-          console.error('Error during video compression:', err);
-          reject(err);
-        })
-        .run();
-    });
-  };
+        ffmpeg(inputPath)
+            .outputOptions('-report') // Enable FFmpeg logging
+            .videoCodec('libx264')
+            .audioCodec('aac')
+            .audioBitrate('96k')
+            .videoBitrate('300k')
+            .size('640x360')
 
- 
+            .on('start', (commandLine) => {
+                console.log(`FFmpeg process started with command: ${commandLine}`);
+            })
+            .on('progress', (progress) => {
+                console.log(`Processing: ${progress.percent}% done`);
+            })
+            .on('end', () => {
+                console.log('Compression finished successfully');
+                resolve(outputPath);
+            })
+            .on('error', (err) => {
+                console.error('Error during video compression:', err);
+                reject(err);
+            })
+            .run();
+    });
+};
+
+
 
 
 // Compress video function using ffmpeg

@@ -40,9 +40,11 @@ console.log(process.env.CLOUD_NAME),
     // Cloudinary Configuration
     cloudinary.config({
 
+
+
         cloud_name: process.env.CLOUD_NAME,
-        api_key: process.env.API_KEY,
-        api_secret: process.env.API_SECRET,
+        api_key: process.env.CLOUDINARY_CLIENT_KEY,
+        api_secret: process.env.CLOUDINARY_API_SECRET,
     });
 
 // Ensure the uploads directory exists
@@ -246,7 +248,7 @@ mongoose.connect(process.env.MONGODB_STRING).then(() => {
 const __dirname2 = path.resolve();
 app.use(express.static(path.join(__dirname2, '/frontend/build')))
 app.get("*", (req, res) => {
-   res.sendFile(path.resolve(__dirname2 , "frontend" , "build" , "index.html"))
+    res.sendFile(path.resolve(__dirname2, "frontend", "build", "index.html"))
 })
 
 

@@ -74,12 +74,11 @@ const upload = multer({ storage: storage });
 const compressVideo = (inputPath, outputPath) => {
     return new Promise((resolve, reject) => {
         ffmpeg(inputPath)
-            .outputOptions('-report') // Enable FFmpeg logging
-            .videoCodec('libx264')
-            .audioCodec('aac')
-            .audioBitrate('96k')
-            .videoBitrate('300k')
-            .size('640x360')
+        .videoCodec('libx264')
+        .audioCodec('aac')
+        .audioBitrate('96k') // Lower audio bitrate
+        .videoBitrate('300k') // Lower video bitrate
+        .size('640x360') // Lower resolution
 
             .on('start', (commandLine) => {
                 console.log(`FFmpeg process started with command: ${commandLine}`);

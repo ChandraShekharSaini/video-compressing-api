@@ -45,7 +45,7 @@ const VideoUpload = () => {
     setUploading(true);
 
     try {
-      const response = await axios.post('http://localhost:3500/upload', formData, {
+      const response = await axios.post('https://my-video-9ljf.onrender.com/upload', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

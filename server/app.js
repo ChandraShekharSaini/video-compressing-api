@@ -26,7 +26,7 @@ dotenv.config();
 
 
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: 'https://my-video-9ljf.onrender.com',
     credentials: true,
 }))
 app.use(express.json())
@@ -181,47 +181,42 @@ app.use("/api/auth", authRouter)
 //       saveUninitialized: true,
 //     })
 //   );
-import passport from './authentication/passport.js';
-
-app.use(passport.initialize());
 
 
-app.get(
-    '/auth/google',
-    passport.authenticate('google', { scope: ['profile', 'email'] })
-);
 
-app.get(
-    '/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: 'http://localhost:3000/sign-in', session: false }),
-    (req, res) => {
-        console.log(req.user);
-        //   res.redirect('http://localhost:3000');  // Redirect to frontend
+import passportGoogleAuth from "./authentication/passportGoogleAuth.js"
+app.use(passportGoogleAuth.initialize())
+app.get('/auth/google',
+    passportGoogleAuth.authenticate('google', { scope: ['profile', 'email'] }));
 
-        const user = req.user
+app.get('/auth/google/callback',
+    passportGoogleAuth.authenticate('google', { failureRedirect: 'https://my-video-9ljf.onrender.com/sign-in', session: false }),
+    function (req, res) {
 
 
-        // const token = jwt.sign({ id: req.user._id }, 'knkk6tnknk')
-        //.cookie('access-token', token, { maxAge: 360 })
-        res.status(200).redirect(`http://localhost:3000/profile?user=${encodeURIComponent(JSON.stringify(req.user))}`)
+        const userData = req.user
 
-    }
-);
+        const token = jwt.sign({ user: req.user }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
-import passportGithub from './authentication/passportGithub.js';
+        res.status(200).redirect(`https://my-video-9ljf.onrender.com`);
+
+    });
+
+import passportGithub from "./authentication/passportGithub.js"
 app.use(passportGithub.initialize())
 app.get('/auth/github',
-    passportGithub.authenticate('github', { scope: ['profile', 'email'] })
-)
-app.get('/auth/github/callback',
-    passportGithub.authenticate('github', { failureRedirect: "http://localhost:3000/sign-in", session: false }),
-    (req, res) => {
+    passportGithub.authenticate('github', { scope: ['user:email'] }));
 
-        const user = req
-        console.log(user)
-        res.status(200).redirect(`http://localhost:3000/profile?user=${encodeURIComponent(JSON.stringify(req.user))}`)
-    }
-)
+app.get('/auth/github/callback',
+    passportGithub.authenticate('github', { failureRedirect: 'https://my-video-9ljf.onrender.com/sign-in', session: false }),
+    function (req, res) {
+
+
+        const token = jwt.sign({ user: req.user }, process.env.JWT_SECRET, { expiresIn: '1hr' });
+
+        res.redirect(`https://my-video-9ljf.onrender.com`);
+    });
+
 
 app.use((err, req, res, next) => {
     const statusCode = err.statusCode || 500;

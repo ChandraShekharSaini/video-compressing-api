@@ -57,7 +57,7 @@ const SignUp = () => {
     ev.preventDefault();
     if (formValidation()) {
       try {
-        const response = await fetch("http://localhost:3500/api/auth/signup", {
+        const response = await fetch("https://my-video-9ljf.onrender.com/api/auth/signup", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -83,12 +83,12 @@ const SignUp = () => {
   };
 
   const handleGoogleSignIn = async () => {
-    window.location.href = "http://localhost:3500/auth/google";
+    window.location.href = "https://my-video-9ljf.onrender.com/auth/google";
 
   };
 
   const handleRedditSignIn = async () => {
-    window.location.href = "http://localhost:3500/auth/github";
+    window.location.href = "https://my-video-9ljf.onrender.com/auth/github";
 
   };
 

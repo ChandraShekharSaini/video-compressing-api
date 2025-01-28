@@ -13,10 +13,14 @@ const app = express();
 const PORT = 3500;
 
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Configure Cloudinary
+ffmpeg.setFfmpegPath(ffmpegPath);
+fs.chmodSync(ffmpegPath, 0o755);
+
+
 cloudinary.config({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.CLOUDINARY_CLIENT_KEY,
@@ -28,7 +32,7 @@ const storage = multer.memoryStorage(); // Store files in memory as buffers
 const upload = multer({ storage });
 
 
-ffmpeg.setFfmpegPath(ffmpegPath);
+
 
 // Function to compress video using FFmpeg and temporary files
 const compressVideoStream = (inputBuffer) => {

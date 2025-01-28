@@ -76,8 +76,8 @@ const compressVideo = (inputPath, outputPath) => {
         ffmpeg(inputPath)
             .videoCodec('libx264')
             .audioCodec('aac')
-            .audioBitrate('96k') // Lower audio bitrate
-            .videoBitrate('300k') // Lower video bitrate
+            .audioBitrate('64k') // Lower audio bitrate
+            .videoBitrate('200k') // Lower video bitrate
             .on('start', (commandLine) => {
                 console.log(`FFmpeg process started with command: ${commandLine}`);
             })

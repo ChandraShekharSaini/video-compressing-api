@@ -74,12 +74,10 @@ const upload = multer({ storage: storage });
 const compressVideo = (inputPath, outputPath) => {
     return new Promise((resolve, reject) => {
         ffmpeg(inputPath)
-        .videoCodec('libx264')
-        .audioCodec('aac')
-        .audioBitrate('96k') // Lower audio bitrate
-        .videoBitrate('300k') // Lower video bitrate
-        .size('640x360') // Lower resolution
-
+            .videoCodec('libx264')
+            .audioCodec('aac')
+            .audioBitrate('96k') // Lower audio bitrate
+            .videoBitrate('300k') // Lower video bitrate
             .on('start', (commandLine) => {
                 console.log(`FFmpeg process started with command: ${commandLine}`);
             })
@@ -88,16 +86,15 @@ const compressVideo = (inputPath, outputPath) => {
             })
             .on('end', () => {
                 console.log('Compression finished successfully');
-                resolve(outputPath);
+                resolve(outputPath); // Resolves the promise with the outputPath
             })
             .on('error', (err) => {
                 console.error('Error during video compression:', err);
-                reject(err);
+                reject(err); // Rejects the promise in case of an error
             })
-            .run();
+            .save(outputPath); // Specifies the output file path
     });
 };
-
 
 
 
@@ -232,11 +229,11 @@ app.use((err, req, res, next) => {
 
 
 
-mongoose.connect(process.env.MONGODB_STRING).then(() => {
-    console.log("Connected To DB")
-}).catch((error) => {
-    console.log(error)
-})
+// mongoose.connect(process.env.MONGODB_STRING).then(() => {
+//     console.log("Connected To DB")
+// }).catch((error) => {
+//     console.log(error)
+// })
 
 // const __dirname2 = path.resolve();
 // app.use(express.static(path.join(__dirname2, '/frontend/build')))

@@ -5,7 +5,9 @@ import { v2 as cloudinary } from 'cloudinary';
 import express from 'express';
 import fs from 'fs';
 import path from 'path';
+
 import os from 'os';
+import ffmpegPath from 'ffmpeg-static';  
 
 const app = express();
 const PORT = 3500;
@@ -24,6 +26,9 @@ cloudinary.config({
 // Initialize Multer and configure storage
 const storage = multer.memoryStorage(); // Store files in memory as buffers
 const upload = multer({ storage });
+
+
+ffmpeg.setFfmpegPath(ffmpegPath);
 
 // Function to compress video using FFmpeg and temporary files
 const compressVideoStream = (inputBuffer) => {
@@ -89,9 +94,7 @@ app.post('/upload', upload.single('file'), async (req, res) => {
 });
 
 
-app.get("/a" , (req,res,next)=>{
-    res.json("Hello")
-})
+
 
 // Start the server
 app.listen(PORT, () => {

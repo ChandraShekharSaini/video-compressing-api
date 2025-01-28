@@ -238,11 +238,11 @@ mongoose.connect(process.env.MONGODB_STRING).then(() => {
     console.log(error)
 })
 
-const __dirname2 = path.resolve();
-app.use(express.static(path.join(__dirname2, '/frontend/build')))
-app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname2, "frontend", "build", "index.html"))
-})
+// const __dirname2 = path.resolve();
+// app.use(express.static(path.join(__dirname2, '/frontend/build')))
+// app.get("*", (req, res) => {
+//     res.sendFile(path.resolve(__dirname2, "frontend", "build", "index.html"))
+// })
 
 
 app.listen(PORT, () => {

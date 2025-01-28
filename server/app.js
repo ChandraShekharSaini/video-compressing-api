@@ -88,6 +88,11 @@ app.post('/upload', upload.single('file'), async (req, res) => {
     }
 });
 
+
+app.get("/a" , (req,res,next)=>{
+    res.json("Hello")
+})
+
 // Start the server
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}`);
